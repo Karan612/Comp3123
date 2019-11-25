@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GuestHomeComponent } from './components/guest-home/guest-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { AddGameComponent } from './components/add-game/add-game.component';
+import { EditGameComponent } from './components/edit-game/edit-game.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { AdminHomeComponent } from './components/admin-home/admin-home.component
     EditPlayerComponent,
     ListGamesComponent,
     GuestHomeComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    AddGameComponent,
+    EditGameComponent
   ],
   imports: [
     HttpClientModule,

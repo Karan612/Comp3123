@@ -8,17 +8,21 @@ import { ListGamesComponent } from './components/list-games/list-games.component
 import { GuestHomeComponent } from './components/guest-home/guest-home.component';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { PlayerListComponent } from './components/player-list/player-list.component';
+import { AddGameComponent } from './components/add-game/add-game.component';
+import { EditGameComponent } from './components/edit-game/edit-game.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'guest-home'},
   { path: 'guest-home', component: GuestHomeComponent },
   { path: 'add-player', component: AddPlayerComponent },
   { path: 'edit-player/:id', component: EditPlayerComponent },
-  { path: 'join-game', component: JoinGameComponent },
+  { path: 'join-game/:id', component: JoinGameComponent },
   { path: 'admin-login', component: AdminLoginComponent },
   { path: 'list-games', component: ListGamesComponent },
   { path: 'admin-home', component: AdminHomeComponent },
-  { path: 'player-list', component: PlayerListComponent }
+  { path: 'player-list', component: PlayerListComponent },
+  { path: 'add-game', component: AddGameComponent },
+  { path: 'edit-game/:id', component: EditGameComponent }
 ];
 
 @NgModule({

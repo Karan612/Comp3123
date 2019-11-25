@@ -20,8 +20,6 @@ export class AdminLoginComponent implements OnInit {
   }
 
   login() : void {
-    console.log(this.username);
-    console.log(this.password);
     if(this.username == 'admin' && this.password == 'admin'){
      this.router.navigateByUrl('/admin-home');
     }else {

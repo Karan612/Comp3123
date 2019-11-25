@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class AddPlayerComponent implements OnInit {
 
+  favorite_game: any = [];
   visible = true;
   selectable = true;
   removable = true;
@@ -21,7 +22,6 @@ export class AddPlayerComponent implements OnInit {
   playerForm: FormGroup;
   RankArray: any = [1,2,3,4,5,6,7,8,9,10];
   StatusArray: any = ['Available', 'Unavailable'];
-  FavoriteArray: any = ['Basketball', 'Football'];
 
   ngOnInit() {
     this.submitBookForm();
@@ -32,7 +32,12 @@ export class AddPlayerComponent implements OnInit {
     public fb: FormBuilder,
     private router: Router,
     private ngZone: NgZone,
-    private studentApi: ApiService) { }
+    private studentApi: ApiService,
+    private gameApi: ApiService) {
+      this.gameApi.GetGames().subscribe(data => {
+        this.favorite_game = data;
+      })
+     }
 
      /* Reactive book form */
   submitBookForm() {
@@ -43,7 +48,8 @@ export class AddPlayerComponent implements OnInit {
       time: ['', [Validators.required]],
       favorite_game: ['', [Validators.required]],
       status: ['', [Validators.required]],
-    })
+    });
+
   }
 
     /* Get errors */
@@ -55,7 +61,7 @@ export class AddPlayerComponent implements OnInit {
     submitPlayerForm() {
       if (this.playerForm.valid) {
         this.studentApi.AddPlayer(this.playerForm.value).subscribe(res => {
-          this.ngZone.run(() => this.router.navigateByUrl('/player-list'))
+          this.ngZone.run(() => this.router.navigateByUrl('/admin-home'))
         });
       }
     }

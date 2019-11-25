@@ -17,7 +17,7 @@ gameRoute.route('/add-game').post((req, res, next) => {
 });
 
 // Get all game
-gameRoute.route('/').get((req, res) => {
+gameRoute.route('/get-games').get((req, res) => {
   Game.find((error, data) => {
     if (error) {
       return next(error)
@@ -54,9 +54,9 @@ gameRoute.route('/update-game/:id').put((req, res, next) => {
   })
 })
 
-// Delete player
-playerRoute.route('/delete-player/:id').delete((req, res, next) => {
-  Player.findByIdAndRemove(req.params.id, (error, data) => {
+// Delete game
+gameRoute.route('/delete-game/:id').delete((req, res, next) => {
+  Game.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       console.log('error')
       return next(error);
@@ -68,4 +68,4 @@ playerRoute.route('/delete-player/:id').delete((req, res, next) => {
   })
 })
 
-module.exports = playerRoute;
+module.exports = gameRoute;

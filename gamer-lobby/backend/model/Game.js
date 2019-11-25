@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 // Define collection and schema
 let Game = new Schema({
-  player: {
-    title: String
+  title: {
+    type: String
   },
   platform: {
     type: String

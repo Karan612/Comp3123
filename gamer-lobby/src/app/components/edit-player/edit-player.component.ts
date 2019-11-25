@@ -1,7 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material';
 import { ApiService } from './../../shared/api.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
@@ -12,6 +11,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class EditPlayerComponent implements OnInit {
 
+  favorite_game: any = [];
   visible = true;
   selectable = true;
   removable = true;
@@ -22,14 +22,19 @@ export class EditPlayerComponent implements OnInit {
   playerForm: FormGroup;
   RankArray: any = [1,2,3,4,5,6,7,8,9,10];
   StatusArray: any = ['Available', 'Unavailable'];
-  FavoriteArray: any = ['Basketball', 'Football'];
   
   constructor( 
     public fb: FormBuilder,
     private router: Router,
     private ngZone: NgZone,
     private actRoute: ActivatedRoute,
-    private playerApi: ApiService) {
+    private playerApi: ApiService,
+    private gameApi: ApiService)
+     {
+      this.gameApi.GetGames().subscribe(data => {
+        this.favorite_game = data;
+      })
+     
       var id = this.actRoute.snapshot.paramMap.get('id');
       this.playerApi.GetPlayer(id).subscribe(data => {
       this.playerForm = this.fb.group({
@@ -64,7 +69,6 @@ export class EditPlayerComponent implements OnInit {
   }
 
   updatePlayerForm() {
-    console.log(this.playerForm.value)
     var id = this.actRoute.snapshot.paramMap.get('id');
     if (window.confirm('Are you sure you want to update?')) {
       this.playerApi.UpdatePlayer(id, this.playerForm.value).subscribe( res => {
