@@ -7,5 +7,17 @@ table {
     float: right;
     margin: 10px;
 }
+.example-spacer {
+    flex: 1 1 auto;
+}
+#searchBar{
+    margin-left: 170%;
+    width: 40%;
+    padding: 5px;
+}
+#searchBar input{
+    padding: 5px;
+    padding-left: 15px;
+}
 
   

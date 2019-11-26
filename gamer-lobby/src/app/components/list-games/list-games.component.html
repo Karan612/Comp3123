@@ -1,7 +1,15 @@
 <!-- Title group  -->
 <div class="title-group">
-        <button mat-raised-button [routerLink]="['/add-game']" color="primary">Add Game</button>
-        <h1 class="mat-h1">Game List</h1>
+        <mat-toolbar-row>
+          <form [formGroup]="searchForm">
+            <span id='searchBar'>
+              <mat-icon class="search-icon" aria-hidden="false" aria-label="Search">search</mat-icon>
+              <input matInput placeholder="search" formControlName="search"  (input)="setSearchWord($event)">
+            </span>
+          </form>
+          <span class="example-spacer"></span>
+          <button mat-raised-button [routerLink]="['/add-game']" color="primary">Add Game</button>
+        </mat-toolbar-row>
         <mat-divider fxFlex="1 0"></mat-divider>
       </div>
       
