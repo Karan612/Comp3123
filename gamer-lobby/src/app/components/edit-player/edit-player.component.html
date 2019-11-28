@@ -46,7 +46,7 @@
                   </mat-error>
               </mat-form-field><br>
               <!-- Favorite Game -->
-              <mat-label>Select a Game</mat-label>
+              <mat-label>Favorite Game</mat-label>
               <mat-form-field>
                   <mat-select placeholder="Select a Game" formControlName="favorite_game">
                       <mat-option *ngFor="let game of favorite_game; let i = index" [value]="favorite_game[i].title">{{favorite_game[i].title}}
