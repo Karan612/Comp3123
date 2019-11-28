@@ -25,6 +25,8 @@ export class EditGameComponent implements OnInit {
     this.updateBookForm();
   }
 
+
+
   constructor(
     public fb: FormBuilder,
     private router: Router,

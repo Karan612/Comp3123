@@ -1,28 +1,33 @@
-<div>
-<mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form class="example-form">
-            <table class="example-full-width" cellspacing="0">
-              <tr>
-                <td>
-                  <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td><mat-form-field class="example-full-width">
-                <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
-              </mat-form-field></td>
-            </tr></table>
-          </form>
-          <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button (click)="login()" color="primary">Login</button>
-        </mat-card-actions>
-</mat-card>
-</div>
+  <!-- Form -->
+  <div class="inner-wrapper">
+    <form [formGroup]="adminForm" (ngSubmit)="login()" #resetStudentForm="ngForm" novalidate>
+      <!-- Form Fields -->
+      <mat-card>
+        <div class="full-wrapper button-wrapper">
+          <!-- Email -->
+          <mat-label>Email:</mat-label>
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="email" formControlName="email">
+              <mat-error *ngIf="handleError('email', 'required')">
+                  You must provide a<strong> email address</strong>
+              </mat-error>
+          </mat-form-field><br>
+          <mat-label>Password</mat-label>
+          <mat-form-field class="example-full-width">
+              <input matInput type="password" placeholder="password" formControlName="password">
+              <mat-error *ngIf="handleError('password', 'required')">
+                  You must provide a<strong> password</strong>
+              </mat-error>
+          </mat-form-field><br>
+        </div>
+      </mat-card>
+      <!-- Submit & Reset -->
+      <mat-card>
+        <div class="full-wrapper button-wrapper">
+          <div class="button-wrapper">
+              <button mat-raised-button color="warn">Submit</button>
+          </div>
+        </div>
+      </mat-card>
+    </form>
+  </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Player } from './player';
 import { Game } from './game';
+import { Admin } from './admin';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -98,6 +99,21 @@ export class ApiService {
   DeleteGame(id): Observable<any> {
     var API_URL = `${this.endpoint}/delete-game/${id}`;
     return this.http.delete(API_URL).pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+
+  // Login
+  Login(data: Admin): Observable<any> {
+    var API_URL = `${this.endpoint}/login`;
+    return this.http.post(API_URL,data).pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+  // Logout
+  Logout(): Observable<any> {
+    var API_URL = `${this.endpoint}/logout`;
+    return this.http.get(API_URL).pipe(
       catchError(this.errorMgmt)
     )
   }

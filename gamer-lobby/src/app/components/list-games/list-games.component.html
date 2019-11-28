@@ -58,8 +58,10 @@
               <th mat-header-cell *matHeaderCellDef> Action </th>
               <td mat-cell *matCellDef="let game; let i = index;">
                 <button mat-raised-button color="primary" class="push-right"
-                  [routerLink]="['/edit-game/', game._id]">Edit</button>
-                <button mat-raised-button color="accent" (click)="deleteGame(i, game)">Delete</button>
+                  [routerLink]="['/edit-game/', game._id]"><mat-icon class="edit-class" aria-hidden="false" aria-label="Edit">edit</mat-icon>
+                </button>
+                <button mat-raised-button color="warn" (click)="deleteGame(i, game)"><mat-icon class="delete-class" aria-hidden="false" aria-label="Delete">delete</mat-icon>
+                </button>
               </td>
             </ng-container>
       

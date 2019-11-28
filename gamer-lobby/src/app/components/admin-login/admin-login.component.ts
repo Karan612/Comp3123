@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
-
+import { ApiService } from './../../shared/api.service';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import {Router} from '@angular/router';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'admin-login',
@@ -10,21 +12,49 @@ import {Router} from '@angular/router';
 })
 export class AdminLoginComponent implements OnInit {
 
-  constructor(private router:Router ) { 
-  }
-
-  username: string;
-  password: string;
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  @ViewChild('chipList',{static : true}) chipList;
+  @ViewChild('resetPlayerForm',{static : true}) myNgForm;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  adminForm: FormGroup;
 
   ngOnInit() {
+    this.submitadminForm();
   }
 
-  login() : void {
-    if(this.username == 'admin' && this.password == 'admin'){
-     this.router.navigateByUrl('/admin-home');
-    }else {
-      alert("Invalid credentials");
+  constructor(
+    public fb: FormBuilder,
+    private router:Router,
+    private adminApi: ApiService,
+    private ngZone: NgZone
+    ) { 
+  }
+
+  submitadminForm() {
+    this.adminForm = this.fb.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
+  }
+
+  /* Get errors */
+  public handleError = (controlName: string, errorName: string) => {
+    return this.adminForm.controls[controlName].hasError(errorName);
+  } 
+
+  login() {
+    if (this.adminForm.valid) {
+      this.adminApi.Login(this.adminForm.value).subscribe(req => {
+        if(req['status']){
+        this.ngZone.run(() => this.router.navigateByUrl('/admin-home'));
+        }
+        else{
+          alert('Invalid Credentials!');
+        }
+      });
     }
   }
-
 }

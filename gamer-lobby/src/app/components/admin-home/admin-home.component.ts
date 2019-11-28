@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { ApiService } from './../../shared/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private adminApi: ApiService,
+    private router: Router,
+    private ngZone: NgZone,) { }
 
   ngOnInit() {
+  }
+
+  logout(){
+    this.adminApi.Logout().subscribe(req => {
+      this.ngZone.run(() => this.router.navigateByUrl('/guest-home'));
+    });
   }
 
 }
