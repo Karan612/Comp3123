@@ -27,7 +27,7 @@ Adminroute.post('/login',(req, res) =>{
         else{
           const token = jwt.sign({_id: admin._id},process.env.TOKEN);
           res.header('auth_token', token);
-          res.send({ status: true });
+          res.send({ status: true , token:process.env.TOKEN});
         }
     });
 }) 

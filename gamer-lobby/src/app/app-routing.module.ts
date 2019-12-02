@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'edit-player/:id', component: EditPlayerComponent },
   { path: 'join-game/:id', component: JoinGameComponent },
   { path: 'admin-login', component: AdminLoginComponent },
-  { path: 'admin-home', component: AdminHomeComponent },
+  { path: 'admin-home/:id', component: AdminHomeComponent },
   { path: 'add-game', component: AddGameComponent },
   { path: 'edit-game/:id', component: EditGameComponent }
 ];

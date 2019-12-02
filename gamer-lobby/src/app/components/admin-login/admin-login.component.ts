@@ -2,8 +2,7 @@ import { ApiService } from './../../shared/api.service';
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import {Router} from '@angular/router';
-import { invalid } from '@angular/compiler/src/render3/view/util';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'admin-login',
@@ -47,9 +46,9 @@ export class AdminLoginComponent implements OnInit {
 
   login() {
     if (this.adminForm.valid) {
-      this.adminApi.Login(this.adminForm.value).subscribe(req => {
-        if(req['status']){
-        this.ngZone.run(() => this.router.navigateByUrl('/admin-home'));
+      this.adminApi.Login(this.adminForm.value).subscribe(res => {
+        if(res['status']){
+        this.ngZone.run(() => this.router.navigateByUrl('/admin-home/1'));
         }
         else{
           alert('Invalid Credentials!');

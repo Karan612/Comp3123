@@ -68,10 +68,8 @@ export class EditGameComponent implements OnInit {
 
   updateGameForm() {
     var id = this.actRoute.snapshot.paramMap.get('id');
-    if (window.confirm('Are you sure you want to update?')) {
       this.gameApi.UpdateGame(id, this.gameForm.value).subscribe( res => {
-        this.ngZone.run(() => this.router.navigateByUrl('/admin-home'))
+        this.ngZone.run(() => this.router.navigateByUrl('/admin-home/1'))
       });
-    }
   }
 }
