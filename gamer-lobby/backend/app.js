@@ -32,10 +32,8 @@ app.use('/', express.static(path.join(__dirname, 'dist/gamer-lobby')));
 app.use('/api', [playerRoute,gameRoute,AdminRoute])
 
 // Create port
-const port = process.env.PORT || 4000;
-const server = app.listen(port, () => {
-  console.log('Connected to port ' + port)
-})
+const port = process.env.PORT || 8080;
+
 
 // Find 404 and hand over to error handler
 app.use((req, res, next) => {
@@ -48,3 +46,13 @@ app.use(function (err, req, res, next) {
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
+
+app.use(express.static(path.join(__dirname,'public')));
+
+app.get('*',(req, res) =>{
+  res.sendFile(path.join(__dirname,'public/index.html'));
+})
+
+app.listen(port, () => {
+  console.log('Connected to port ' + port)
+})
